@@ -24,5 +24,5 @@ public interface UserMapper {
     public int updateTokenByPhoneNumber(UserInfo userInfo);
 
     @Select("select * from user where phoneNumber=#{phoneNumber} and token=#{token}")
-    UserInfo getUserInfoByLogin(String phoneNumber, String token);
+    UserInfo getUserInfoByLogin(UserInfo userInfo);
 }

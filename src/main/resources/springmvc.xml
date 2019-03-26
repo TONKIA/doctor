@@ -27,7 +27,8 @@
     <!--<context:annotation-config/>-->
 
     <!-- 静态文件处理  -->
-    <mvc:resources location="/assets/" mapping="/public/**/"/>
+    <mvc:resources location="/public/" mapping="/public/**/"/>
+    <mvc:resources location="/ueditor/" mapping="/ueditor/**/"/>
 
     <!-- 文件上传-->
     <bean id="multipartResolver"

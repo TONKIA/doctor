@@ -26,7 +26,7 @@
     </style>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=co5zmm5HcXsCSE3xtjmdxA7KCwI0NZGl"></script>
-    <title>百度地图画圆</title>
+    <title>地图</title>
 </head>
 <body>
 <div id="l-map"></div>
@@ -36,24 +36,19 @@
     var map = new BMap.Map("l-map");
     map.enableScrollWheelZoom(true);
 
-    var point1 = new BMap.Point(109.1920694512, 34.3714914830);
+    //34.3485820000,108.9445190000
+    var point1 = new BMap.Point(108.9445190000, 34.3485820000);
     map.centerAndZoom(point1, 6);
-    var circle1 = new BMap.Circle(point1, 213900);
+    var circle1 = new BMap.Circle(point1, 21000);
     circle1.setFillColor("#A6CBA1");
     circle1.setStrokeColor("#A6CBA1");
-
-    var point2 = new BMap.Point(108.7664091657, 34.4422617096);
-    var circle2 = new BMap.Circle(point2, 300000);
-    circle2.setFillColor("#aabbcc");
-    circle2.setStrokeColor("#aabbcc");
-
-    var point3 = new BMap.Point(109.1920694512, 50.3714914830);
-    var circle3 = new BMap.Circle(point3, 100000);
-    circle3.setFillColor("#112edd");
-    circle3.setStrokeColor("#112edd");
-
     map.addOverlay(circle1);
-    map.addOverlay(circle2);
-    map.addOverlay(circle3);
+
+    // var point2 = new BMap.Point(108.7664091657, 34.4422617096);
+    // var circle2 = new BMap.Circle(point2, 300000);
+    // circle2.setFillColor("#aabbcc");
+    // circle2.setStrokeColor("#aabbcc");
+    // map.addOverlay(circle2);
+
 
 </script>

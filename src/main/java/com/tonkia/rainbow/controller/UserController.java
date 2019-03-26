@@ -55,8 +55,10 @@ public class UserController {
         if (token == null)
             responseMessage = new ResponseMessage("登录失败！", null, ResponseMessage.FAILURE);
         else {
+            UserInfo userInfo = userService.login(phoneNumber, token);
             Map data = new HashMap();
             data.put("token", token);
+            data.put("uid", userInfo.getUid());
             responseMessage = new ResponseMessage("登录成功！", data, ResponseMessage.SUCCESS);
         }
         return responseMessage;

@@ -12,6 +12,16 @@ public class ArticleInfo {
     private String picUrl;
     private String articleUrl;
     private String content;
+    private Integer category;
+
+    public Integer getCategory() {
+        return category;
+    }
+
+    public void setCategory(Integer category) {
+        this.category = category;
+    }
+
 
     public Integer getArticleId() {
         return articleId;

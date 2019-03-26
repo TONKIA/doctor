@@ -137,6 +137,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo login(String phoneNumber, String token) {
-        return userMapper.getUserInfoByLogin(phoneNumber, token);
+        UserInfo user = new UserInfo();
+        user.setPhoneNumber(phoneNumber);
+        user.setToken(token);
+        return userMapper.getUserInfoByLogin(user);
     }
 }

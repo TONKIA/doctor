@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,17 +57,12 @@ public class HomeController {
         return new ResponseMessage("首页加载数据成功", data, ResponseMessage.SUCCESS);
     }
 
-    @RequestMapping("getTotalTime")
+
+    @RequestMapping("getAllTip")
     @ResponseBody
-    public ResponseMessage getTotalTime(HttpSession session) {
-        UserInfo userInfo = (UserInfo) session.getAttribute("user");
-        long days = 1;
-        if (userInfo != null) {
-            long nd = 1000 * 24 * 60 * 60;
-            long diff = new Date().getTime() - userInfo.getRegisterTime().getTime();
-            days = diff / nd;
-        }
-        return new ResponseMessage("首页加载数据成功", days, ResponseMessage.SUCCESS);
+    public ResponseMessage getTip() {
+        List<TipInfo> tipInfos = homeService.getAllTip();
+        return new ResponseMessage("获取小知识成功", tipInfos, ResponseMessage.SUCCESS);
     }
 
 }

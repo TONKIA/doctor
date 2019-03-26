@@ -56,12 +56,9 @@ public class FileController {
     @RequestMapping("getImg/{fileName:.+}")
     public void getImgFile(@PathVariable("fileName") String fileName, HttpServletResponse response) {
         try {
-            // response.setContentType("image/png");
-            response.setContentType("image/jpeg");
+
             OutputStream outputStream = response.getOutputStream();
             boolean res = fileService.getImg(outputStream, fileName);
-//            outputStream.flush();
-//            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

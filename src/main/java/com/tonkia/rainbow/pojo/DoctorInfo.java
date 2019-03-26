@@ -11,6 +11,15 @@ public class DoctorInfo {
     private String expert;
     private String label;
     private String[] labelArray;
+    private String hospital;
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
 
     public Integer getUid() {
         return uid;

@@ -16,4 +16,6 @@ public interface HomeService {
     public List<ArticleInfo> getArticle(int articleNumber);
 
     public List<TipInfo> getTip(Integer tipNumber);
+
+    List<TipInfo> getAllTip();
 }

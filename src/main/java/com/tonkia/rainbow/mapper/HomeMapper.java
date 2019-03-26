@@ -13,7 +13,7 @@ public interface HomeMapper {
     @Select("select * from banner")
     public List<BannerInfo> getBanner();
 
-    @Select("SELECT doctor.uid, nikeName, user.avator, star, qualificate, favorRate, cmtCount, expert, label FROM doctor LEFT JOIN user ON doctor.uid = user.uid ORDER BY favorRate LIMIT #{0}")
+    @Select("SELECT doctor.uid, nikeName, user.avator, star, qualificate, favorRate, cmtCount, expert, label FROM doctor LEFT JOIN user ON doctor.uid = user.uid ORDER BY star LIMIT #{0}")
     List<DoctorInfo> getDoctor(int doctorNumber);
 
     @Select("SELECT  articleId,article.uid,nikeName,avator,title,summary,cmtCount,praise,picUrl,articleUrl,content FROM article LEFT JOIN user ON article.uid = user.uid ORDER BY articleId DESC LIMIT #{0}")
@@ -21,4 +21,7 @@ public interface HomeMapper {
 
     @Select("SELECT * FROM tip ORDER BY RAND() LIMIT #{0}")
     List<TipInfo> getTip(Integer tipNumber);
+
+    @Select("SELECT * FROM tip")
+    List<TipInfo> getAllTip();
 }

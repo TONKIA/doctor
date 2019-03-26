@@ -1,5 +1,6 @@
 package com.tonkia.rainbow.service.impl;
 
+import com.tonkia.rainbow.mapper.DoctorMapper;
 import com.tonkia.rainbow.mapper.HomeMapper;
 import com.tonkia.rainbow.pojo.ArticleInfo;
 import com.tonkia.rainbow.pojo.BannerInfo;
@@ -17,6 +18,8 @@ public class HomeServiceImpl implements HomeService {
 
     @Autowired
     HomeMapper homeMapper;
+    @Autowired
+    DoctorMapper doctorMapper;
 
     @Override
     public List<BannerInfo> getBanner() {
@@ -28,6 +31,9 @@ public class HomeServiceImpl implements HomeService {
         List<DoctorInfo> list = homeMapper.getDoctor(doctorNumber);
         for (DoctorInfo di : list) {
             di.setLabelArray(di.getLabel().split("&"));
+            Float favorRate = doctorMapper.getDoctorFavorRateByUid(di.getUid());
+            if (favorRate != null)
+                di.setFavorRate(favorRate);
         }
         return list;
     }
@@ -40,6 +46,11 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<TipInfo> getTip(Integer tipNumber) {
         return homeMapper.getTip(tipNumber);
+    }
+
+    @Override
+    public List<TipInfo> getAllTip() {
+        return homeMapper.getAllTip();
     }
 
 

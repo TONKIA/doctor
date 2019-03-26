@@ -31,6 +31,13 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+        <!--jsp-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
         <!--spring framework-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -101,6 +108,27 @@
             <version>1.0.6</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/qcloudsms-1.0.6.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>ueditor</artifactId>
+            <version>1.1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.json</groupId>
+            <artifactId>json</artifactId>
+            <version>1.1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/json.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.commons</groupId>
+            <artifactId>codec</artifactId>
+            <version>1.9</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-codec-1.9.jar</systemPath>
         </dependency>
         <!--ftpclient-->
         <dependency>
