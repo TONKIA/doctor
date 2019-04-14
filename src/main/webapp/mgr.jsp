@@ -17,9 +17,19 @@
 <body>
 <div id="app" style="padding: 50px;">
     <v-app>
+        <h2>主页</h2>
         <v-carousel>
             <v-carousel-item
                     v-for="(item,i) in items"
+                    :key="i"
+                    :src="item.img"
+            >
+            </v-carousel-item>
+        </v-carousel>
+        <h2>疗伤</h2>
+        <v-carousel>
+            <v-carousel-item
+                    v-for="(item,i) in banner"
                     :key="i"
                     :src="item.img"
             >
@@ -38,12 +48,23 @@
                     跳转链接
                 </td>
                 <td>
+                    用于
+                </td>
+                <td>
                     删除
                 </td>
             </tr>
-            <tr v-for="item in items" :key="item.id">
+            <tr v-for="item in allBanner" :key="item.id">
                 <td>{{item.img}}</td>
                 <td><a :href="item.url">{{item.url}}</a></td>
+                <td>
+                    <div v-if="item.type==0">
+                        主页
+                    </div>
+                    <div v-else>
+                        疗伤
+                    </div>
+                </td>
                 <td>
                     <button class="btn btn-danger" @click="del(item.id)">删除</button>
                 </td>
@@ -58,6 +79,13 @@
                 <label>跳转地址</label>
                 <input type="text" name="url" class="form-control"/><br/>
             </div>
+            <div class="form-group">
+                <label>用于</label>
+                <select name="type" class="form-control">
+                    <option value="0">主页</option>
+                    <option value="1">疗伤</option>
+                </select>
+            </div>
             <input type="submit" class="btn btn-primary"/>
         </form>
     </div>
@@ -67,8 +95,8 @@
         <div class="list-group">
             <a href="#" :class="{'list-group-item':true,active:show==2}" @click.prevent="getArticle(2)">2情感</a>
             <a href="#" :class="{'list-group-item':true,active:show==3}" @click.prevent="getArticle(3)">3疾病</a>
-            <a href="#" :class="{'list-group-item':true,active:show==4}" @click.prevent="getArticle(4)">4辟谣</a>
-            <a href="#" :class="{'list-group-item':true,active:show==5}" @click.prevent="getArticle(5)">5美容</a>
+            <a href="#" :class="{'list-group-item':true,active:show==5}" @click.prevent="getArticle(4)">4美容</a>
+            <a href="#" :class="{'list-group-item':true,active:show==4}" @click.prevent="getArticle(5)">5辟谣</a>
         </div>
         <table class="table table-bordered">
             <tr>
@@ -208,6 +236,8 @@
         el: '#app',
         data: {
             items: null,
+            banner: null,
+            allBanner: null,
             topItems: null,
             recommandItems: null,
             articleItems: null,
@@ -221,6 +251,14 @@
                     this.$http.post("/home/getBanner", {}, {}).then(function (response) {
                         console.info(response.body);
                         this.items = response.body.data;
+                    });
+                    this.$http.post("/psychology/getBanner", {}, {}).then(function (response) {
+                        console.info(response.body);
+                        this.banner = response.body.data;
+                    });
+                    this.$http.post("/mgr/getBanner", {}, {}).then(function (response) {
+                        console.info(response.body);
+                        this.allBanner = response.body.data;
                     });
                 });
             },
@@ -290,6 +328,16 @@
             this.$http.post("/home/getBanner", {}, {}).then(function (response) {
                 console.info(response.body);
                 this.items = response.body.data;
+            });
+
+            this.$http.post("/psychology/getBanner", {}, {}).then(function (response) {
+                console.info(response.body);
+                this.banner = response.body.data;
+            });
+
+            this.$http.post("/mgr/getBanner", {}, {}).then(function (response) {
+                console.info(response.body);
+                this.allBanner = response.body.data;
             });
 
             this.$http.post("/popularization/getTop", {}, {}).then(function (response) {

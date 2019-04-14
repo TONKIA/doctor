@@ -39,16 +39,18 @@
     //34.3485820000,108.9445190000
     var point1 = new BMap.Point(108.9445190000, 34.3485820000);
     map.centerAndZoom(point1, 6);
-    var circle1 = new BMap.Circle(point1, 21000);
+    var circle1 = new BMap.Circle(point1, 20380);
     circle1.setFillColor("#A6CBA1");
     circle1.setStrokeColor("#A6CBA1");
     map.addOverlay(circle1);
 
-    // var point2 = new BMap.Point(108.7664091657, 34.4422617096);
-    // var circle2 = new BMap.Circle(point2, 300000);
-    // circle2.setFillColor("#aabbcc");
-    // circle2.setStrokeColor("#aabbcc");
-    // map.addOverlay(circle2);
+    //34.2594067084,108.9470064640
+
+    var point2 = new BMap.Point(108.9470064640, 34.2594067084);
+    var circle2 = new BMap.Circle(point2, 14440);
+    circle2.setFillColor("#aabbcc");
+    circle2.setStrokeColor("#aabbcc");
+    map.addOverlay(circle2);
 
 
 </script>

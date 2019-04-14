@@ -3,6 +3,8 @@ package com.tonkia.rainbow.service;
 import com.tonkia.rainbow.pojo.BannerInfo;
 import com.tonkia.rainbow.pojo.TipInfo;
 
+import java.util.List;
+
 public interface ManagerService {
     public boolean insertBanner(BannerInfo bannerInfo);
 
@@ -17,4 +19,6 @@ public interface ManagerService {
     boolean insertTip(TipInfo tipInfo);
 
     boolean deleteTip(int id);
+
+    List<BannerInfo> getBanner();
 }

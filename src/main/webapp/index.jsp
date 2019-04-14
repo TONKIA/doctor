@@ -101,7 +101,10 @@
             String phoneNumber, String token, Integer doctorId<br/>
         </td>
     </tr>
-
+    <tr>
+        <td>/psychology/getBanner</td>
+        <td>获取Banner</td>
+    </tr>
     <tr>
         <td>/psychology/getAllSaying/{category}</td>
         <td>
@@ -112,11 +115,28 @@
             3 我的安利<br/>
         </td>
     </tr>
-
+    <tr>
+        <td>/psychology/getSaying/{sayingId}</td>
+        <td>
+            Integer sayingId
+        </td>
+    </tr>
+    <tr>
+        <td>/psychology/comment</td>
+        <td>
+            phoneNumber, token, sayingId, content
+        </td>
+    </tr>
+    <tr>
+        <td>/psychology/thumbup</td>
+        <td>
+            String phoneNumber, String token, Integer sayingId
+        </td>
+    </tr>
     <tr>
         <td>/psychology/publish</td>
         <td>
-            String phoneNumber, String token, String content,Integer category, MultipartFile file<br/>
+            String phoneNumber, String token, String content,Integer category, imgUrl<br/>
 
             <form action="/psychology/publish" method="post" enctype="multipart/form-data">
                 phoneNumber:<input type="text" name="phoneNumber"/><br/>
@@ -129,9 +149,177 @@
                     <option value="2">我的求助</option>
                     <option value="3">我的安利</option>
                 </select><br/>
-                file:<input type="file" name="file"/><br/>
+                imgUrl:<input type="text" name="imgUrl"/><br/><br/>
                 <input type="submit" value="发布"/>
             </form>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>/search/keyword</td>
+        <td>
+            搜索接口</br>
+            传参 keyWords 虽然没什么用</br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/search/hot</td>
+        <td>
+            获取热门搜索
+        </td>
+    </tr>
+
+    <tr>
+        <td>/user/info/{uid}</td>
+        <td>
+            获取 nikename 和 avator
+        </td>
+    </tr>
+
+    <tr>
+        <td>/doctor/isFocus</td>
+        <td>
+            是否关注</br>
+            参数 String phoneNumber, String token, Integer doctorId</br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/doctor/focus</td>
+        <td>
+            关注</br>
+            参数 String phoneNumber, String token, Integer doctorId</br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/article/thumbup</td>
+        <td>
+            文章点赞</br>
+            String phoneNumber, String token, Integer articleId</br>
+        </td>
+    </tr>
+    <tr>
+        <td>/article/isThumbup</td>
+        <td>
+            文章是否被点赞</br>
+            String phoneNumber, String token, Integer articleId</br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/user/detailInfo</td>
+        <td>
+            获取用户主页的信息 点赞 关注 评论</br>
+            String phoneNumber, String token</br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/article/comment</td>
+        <td>
+            文章评论接口<br/>
+            phoneNumber ,token ,articleId, content<br/>
+            <form method="post" action="/article/comment">
+                phoneNumber:<input type="text" name="phoneNumber"/><br/>
+                token:<input type="text" name="token"/><br/>
+                articleId:<input type="text" name="articleId"/><br/>
+                content:<input type="text" name="content"/><br/>
+                <input type="submit" value="提交"><br/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>/article/comment/{articleId}</td>
+        <td>
+            获取文章评论接口 时间降序
+        </td>
+    </tr>
+
+    <tr>
+        <td>/doctor/comment</td>
+        <td>
+            医生服务评论接口<br/>
+            phoneNumber ,token ,doctorId, content<br/>
+            <form method="post" action="/doctor/comment">
+                phoneNumber:<input type="text" name="phoneNumber"/><br/>
+                token:<input type="text" name="token"/><br/>
+                doctorId:<input type="text" name="doctorId"/><br/>
+                content:<input type="text" name="content"/><br/>
+                <input type="submit" value="提交"><br/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>/doctor/comment/{doctorId}</td>
+        <td>
+            获取医生评论接口 时间降序
+        </td>
+    </tr>
+
+    <tr>
+        <td>/user/modifyAvator</td>
+        <td>
+            修改头像<br/>
+            String phoneNumber, String token, MultipartFile file<br/>
+            <form method="post" action="/user/modifyAvator" enctype="multipart/form-data">
+                phoneNumber:<input type="text" name="phoneNumber"/><br/>
+                token:<input type="text" name="token"/><br/>
+                file:<input type="file" name="file"/><br/>
+                <input type="submit" value="提交"/><br/>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/user/modifyNikeName</td>
+        <td>
+            修改昵称<br/>
+            String phoneNumber, String token, String nikeName<br/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/search/filter</td>
+        <td>
+            筛选<br/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/popularization/search</td>
+        <td>
+            科普文章搜索<br/>
+            参数keyword<br/>
+            <form method="post" action="/popularization/search">
+                <input required name="keyword" type="text"/>
+                <input type="submit" value="search">
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/calendar/addItem</td>
+        <td>
+            添加日历<br/>
+            <form method="post" action="/calendar/addItem">
+                phoneNumber:<input type="text" name="phoneNumber"/><br/>
+                token:<input type="text" name="token"/><br/>
+                content:<input type="text" name="content"/><br/>
+                mood:<select>
+                <option></option>
+            </select>
+                <input type="submit" value="提交"/>
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>/calendar/getItem</td>
+        <td>
+            添加获取<br/>
         </td>
     </tr>
 </table>

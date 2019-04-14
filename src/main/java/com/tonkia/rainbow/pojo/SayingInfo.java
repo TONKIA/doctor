@@ -1,5 +1,8 @@
 package com.tonkia.rainbow.pojo;
 
+import java.util.Date;
+import java.util.List;
+
 public class SayingInfo {
 
     private Integer id;
@@ -9,6 +12,24 @@ public class SayingInfo {
     private String imgUrl;
     private Integer category;
     private Integer uid;
+    private Date time;
+    private List<CmtInfo> cmtInfoList;
+
+    public List<CmtInfo> getCmtInfoList() {
+        return cmtInfoList;
+    }
+
+    public void setCmtInfoList(List<CmtInfo> cmtInfoList) {
+        this.cmtInfoList = cmtInfoList;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     public Integer getUid() {
         return uid;

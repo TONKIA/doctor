@@ -102,6 +102,7 @@ public class FtpUtil {
             int reply;
             ftp.connect(host, port);
             ftp.login(username, password);
+            ftp.setFileType(FTP.BINARY_FILE_TYPE);
             reply = ftp.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply)) {
                 ftp.disconnect();

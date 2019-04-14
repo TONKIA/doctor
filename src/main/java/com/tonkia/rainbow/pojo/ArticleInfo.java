@@ -1,5 +1,7 @@
 package com.tonkia.rainbow.pojo;
 
+import java.util.List;
+
 public class ArticleInfo {
     private Integer articleId;
     private Integer uid;
@@ -13,6 +15,24 @@ public class ArticleInfo {
     private String articleUrl;
     private String content;
     private Integer category;
+    private String newestCmt;
+    private String hospital;
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
+
+    public String getNewestCmt() {
+        return newestCmt;
+    }
+
+    public void setNewestCmt(String newestCmt) {
+        this.newestCmt = newestCmt;
+    }
 
     public Integer getCategory() {
         return category;

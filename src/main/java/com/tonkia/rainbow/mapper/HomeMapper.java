@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface HomeMapper {
 
-    @Select("select * from banner")
+    @Select("select * from banner where type = 0")
     public List<BannerInfo> getBanner();
 
     @Select("SELECT doctor.uid, nikeName, user.avator, star, qualificate, favorRate, cmtCount, expert, label FROM doctor LEFT JOIN user ON doctor.uid = user.uid ORDER BY star LIMIT #{0}")

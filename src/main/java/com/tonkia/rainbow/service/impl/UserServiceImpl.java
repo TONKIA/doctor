@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -142,4 +143,36 @@ public class UserServiceImpl implements UserService {
         user.setToken(token);
         return userMapper.getUserInfoByLogin(user);
     }
+
+    @Override
+    public UserInfo getInfo(Integer uid) {
+        return userMapper.getUserInfo(uid);
+    }
+
+
+    @Override
+    public Integer getFocus(Integer uid) {
+        return userMapper.getFocus(uid);
+    }
+
+    @Override
+    public Integer getCmtCount(Integer uid) {
+        return userMapper.getCmt(uid);
+    }
+
+    @Override
+    public Integer getThumbCount(Integer uid) {
+        return userMapper.getThumbCount(uid);
+    }
+
+    @Override
+    public boolean updateAvator(UserInfo userInfo) {
+        return userMapper.updateAvator(userInfo);
+    }
+
+    @Override
+    public boolean updateNikeName(UserInfo userInfo) {
+        return userMapper.updateNikeName(userInfo);
+    }
+
 }

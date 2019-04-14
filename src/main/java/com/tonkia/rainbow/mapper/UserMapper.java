@@ -25,4 +25,23 @@ public interface UserMapper {
 
     @Select("select * from user where phoneNumber=#{phoneNumber} and token=#{token}")
     UserInfo getUserInfoByLogin(UserInfo userInfo);
+
+    @Select("select nikeName, avator from user where uid=#{0}")
+    UserInfo getUserInfo(Integer uid);
+
+    @Select("select count(*) from focus where uid=#{0}")
+    int getFocus(Integer uid);
+
+
+    @Select("select count(*) from article_thumbup where uid=#{0}")
+    Integer getThumbCount(Integer uid);
+
+    @Select("select count(*) from article_comment where uid=#{0}")
+    Integer getCmt(Integer uid);
+
+    @Update("update user set avator=#{avator} where uid = #{uid}")
+    boolean updateAvator(UserInfo userInfo);
+
+    @Update("update user set nikeName=#{nikeName} where uid = #{uid}")
+    boolean updateNikeName(UserInfo userInfo);
 }

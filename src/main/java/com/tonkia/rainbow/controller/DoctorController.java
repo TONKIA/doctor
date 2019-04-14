@@ -1,9 +1,6 @@
 package com.tonkia.rainbow.controller;
 
-import com.tonkia.rainbow.pojo.ArticleInfo;
-import com.tonkia.rainbow.pojo.DoctorInfo;
-import com.tonkia.rainbow.pojo.ResponseMessage;
-import com.tonkia.rainbow.pojo.UserInfo;
+import com.tonkia.rainbow.pojo.*;
 import com.tonkia.rainbow.service.DoctorService;
 import com.tonkia.rainbow.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("doctor")
@@ -85,9 +84,10 @@ public class DoctorController {
         if (userInfo == null)
             return new ResponseMessage("用户未登录", null, ResponseMessage.FAILURE);
         DoctorInfo doctorInfo = doctorService.getDoctorInfoByUid(userInfo.getUid());
-        if (doctorInfo != null)
+        if (doctorInfo != null) {
+            session.setAttribute("doctorInfo", doctorInfo);
             return new ResponseMessage("用户信息获取成功", doctorInfo, ResponseMessage.SUCCESS);
-        else
+        } else
             return new ResponseMessage("用户信息获取失败", null, ResponseMessage.FAILURE);
     }
 
@@ -139,6 +139,90 @@ public class DoctorController {
             return new ResponseMessage("点赞成功", null, ResponseMessage.SUCCESS);
         else
             return new ResponseMessage("点赞失败", null, ResponseMessage.FAILURE);
+    }
+
+    @RequestMapping("/isFocus")
+    @ResponseBody
+    public ResponseMessage isFocus(HttpSession session, String phoneNumber, String token, Integer doctorId) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
+        if (userInfo != null) {
+            boolean isFucus = doctorService.isFocusBySession(userInfo.getUid(), doctorId);
+            Map res = new HashMap<>();
+            res.put("isFocus", isFucus);
+            return new ResponseMessage("成功返回", res, ResponseMessage.SUCCESS);
+        } else {
+            boolean isFucus = doctorService.isFocus(phoneNumber, token, doctorId);
+            Map res = new HashMap<>();
+            res.put("isFocus", isFucus);
+            return new ResponseMessage("成功返回", res, ResponseMessage.SUCCESS);
+        }
+    }
+
+    @RequestMapping("/focus")
+    @ResponseBody
+    public ResponseMessage focus(HttpSession session, String phoneNumber, String token, Integer doctorId) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
+        if (userInfo != null) {
+            if (doctorService.insertFocusBySession(userInfo.getUid(), doctorId))
+                return new ResponseMessage("关注成功", null, ResponseMessage.SUCCESS);
+            else
+                return new ResponseMessage("关注失败", null, ResponseMessage.FAILURE);
+        } else {
+            if (doctorService.insertFocus(phoneNumber, token, doctorId))
+                return new ResponseMessage("关注成功", null, ResponseMessage.SUCCESS);
+            else
+                return new ResponseMessage("关注失败", null, ResponseMessage.FAILURE);
+        }
+    }
+
+    @RequestMapping("/cancelFocus")
+    @ResponseBody
+    public ResponseMessage cancelFocus(HttpSession session, Integer doctorId) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
+        if (userInfo != null) {
+            if (doctorService.deleteFocusBySession(userInfo.getUid(), doctorId))
+                return new ResponseMessage("关注成功", null, ResponseMessage.SUCCESS);
+            else
+                return new ResponseMessage("关注失败", null, ResponseMessage.FAILURE);
+        } else
+            return new ResponseMessage("取消关注失败", null, ResponseMessage.FAILURE);
+    }
+
+    @RequestMapping("/modify")
+    @ResponseBody
+    public ResponseMessage modify(HttpSession session, MultipartFile file, DoctorInfo doctorInfo) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
+        if (userInfo != null) {
+            String url = null;
+            try {
+                url = fileService.uploadImg(file.getOriginalFilename(), file.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            doctorInfo.setUid(userInfo.getUid());
+            doctorInfo.setAvator(url);
+            if (doctorService.updateDoctorInfo(doctorInfo))
+                return new ResponseMessage("修改成功", null, ResponseMessage.SUCCESS);
+            else
+                return new ResponseMessage("修改失败", null, ResponseMessage.FAILURE);
+        }
+        return new ResponseMessage("用户未登录", null, ResponseMessage.FAILURE);
+    }
+
+    @RequestMapping("/comment")
+    @ResponseBody
+    public ResponseMessage comment(String phoneNumber, String token, DoctorCmtInfo cmtInfo) {
+        if (doctorService.insertCmt(phoneNumber, token, cmtInfo))
+            return new ResponseMessage("发表评论成功", null, ResponseMessage.SUCCESS);
+        else
+            return new ResponseMessage("发表评论失败", null, ResponseMessage.FAILURE);
+    }
+
+    @RequestMapping("/comment/{doctorId}")
+    @ResponseBody
+    public ResponseMessage getComment(@PathVariable("doctorId") Integer doctorId) {
+        List<CmtInfo> data = doctorService.getComment(doctorId);
+        return new ResponseMessage("获取评论成功", data, ResponseMessage.SUCCESS);
     }
 
 }

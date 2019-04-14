@@ -34,8 +34,8 @@
         <select class="form-control" name="category">
             <option value="2">情感</option>
             <option value="3">疾病</option>
-            <option value="4">辟谣</option>
-            <option value="5">美容</option>
+            <option value="4">美容</option>
+            <option value="5">辟谣</option>
         </select>
     </div>
 

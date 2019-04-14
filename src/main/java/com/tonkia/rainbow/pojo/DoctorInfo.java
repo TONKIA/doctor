@@ -12,6 +12,24 @@ public class DoctorInfo {
     private String label;
     private String[] labelArray;
     private String hospital;
+    private Integer praiseCount;
+    private Float distance;
+
+    public Float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Float distance) {
+        this.distance = distance;
+    }
+
+    public Integer getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
+    }
 
     public String getHospital() {
         return hospital;
@@ -100,4 +118,6 @@ public class DoctorInfo {
     public void setLabelArray(String[] labelArray) {
         this.labelArray = labelArray;
     }
+
+
 }

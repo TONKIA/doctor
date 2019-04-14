@@ -5,6 +5,17 @@ public class BannerInfo {
     private Integer id;
     private String img;
     private String url;
+    //0 用于主页
+    //1 用于疗伤
+    private Integer type;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;
@@ -34,8 +45,9 @@ public class BannerInfo {
 
     }
 
-    public BannerInfo(String img, String url) {
+    public BannerInfo(String img, String url, Integer type) {
         this.img = img;
         this.url = url;
+        this.type = type;
     }
 }

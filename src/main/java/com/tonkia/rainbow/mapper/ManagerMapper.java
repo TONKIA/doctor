@@ -4,11 +4,14 @@ import com.tonkia.rainbow.pojo.BannerInfo;
 import com.tonkia.rainbow.pojo.TipInfo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 public interface ManagerMapper {
 
-    @Insert("insert into banner(img,url) values(#{img},#{url}) ")
+    @Insert("insert into banner(img,url,type) values(#{img},#{url},#{type}) ")
     public int insertBannerInfo(BannerInfo bannerInfo);
 
     @Delete("delete from banner where id = #{0}")
@@ -28,4 +31,7 @@ public interface ManagerMapper {
 
     @Delete("delete from tip  where tipId = #{0}")
     int delTip(int id);
+
+    @Select("select * from banner")
+    List<BannerInfo> getBanner();
 }

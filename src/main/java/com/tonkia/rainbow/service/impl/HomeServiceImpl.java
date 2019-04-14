@@ -1,5 +1,7 @@
 package com.tonkia.rainbow.service.impl;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.tonkia.rainbow.mapper.ArticleMapper;
 import com.tonkia.rainbow.mapper.DoctorMapper;
 import com.tonkia.rainbow.mapper.HomeMapper;
 import com.tonkia.rainbow.pojo.ArticleInfo;
@@ -20,6 +22,8 @@ public class HomeServiceImpl implements HomeService {
     HomeMapper homeMapper;
     @Autowired
     DoctorMapper doctorMapper;
+    @Autowired
+    ArticleMapper articleMapper;
 
     @Override
     public List<BannerInfo> getBanner() {
@@ -34,13 +38,20 @@ public class HomeServiceImpl implements HomeService {
             Float favorRate = doctorMapper.getDoctorFavorRateByUid(di.getUid());
             if (favorRate != null)
                 di.setFavorRate(favorRate);
+            int cmtCount = doctorMapper.getCmtCountByUid(di.getUid());
+            di.setCmtCount(cmtCount);
         }
         return list;
     }
 
     @Override
     public List<ArticleInfo> getArticle(int articleNumber) {
-        return homeMapper.getArticle(articleNumber);
+        List<ArticleInfo> list = homeMapper.getArticle(articleNumber);
+        for (ArticleInfo articleInfo : list) {
+            articleInfo.setCmtCount(articleMapper.getCmtCount(articleInfo.getArticleId()));
+            articleInfo.setPraise(articleMapper.getThumbupCount(articleInfo.getArticleId()));
+        }
+        return list;
     }
 
     @Override

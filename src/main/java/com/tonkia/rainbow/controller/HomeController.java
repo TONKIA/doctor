@@ -45,14 +45,16 @@ public class HomeController {
         if (tipNumber == null)
             tipNumber = 1;
 
-
         List<DoctorInfo> doctorInfos = homeService.getDoctor(doctorNumber);
         List<ArticleInfo> articleInfos = homeService.getArticle(articleNumber);
         List<TipInfo> tipInfos = homeService.getTip(tipNumber);
 
         Map data = new HashMap();
+        //星级高的在前面
         data.put("doctor", doctorInfos);
+        //最新的文章在前面
         data.put("article", articleInfos);
+        //随机
         data.put("tip", tipInfos);
         return new ResponseMessage("首页加载数据成功", data, ResponseMessage.SUCCESS);
     }

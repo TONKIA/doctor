@@ -13,4 +13,6 @@ public interface PopularizationService {
     List<ArticleInfo> getRecommand();
 
     List<ArticleInfo> getCategory(int category);
+
+    List<ArticleInfo> search(String keyword);
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("mgr")
@@ -22,14 +23,20 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
+    @RequestMapping("getBanner")
+    @ResponseBody
+    public ResponseMessage getBanner() {
+        List<BannerInfo> list = managerService.getBanner();
+        return new ResponseMessage("获取Banner成功", list, ResponseMessage.SUCCESS);
+    }
 
     @RequestMapping("uploadBanner")
     @ResponseBody
-    public ResponseMessage uploadBanner(MultipartFile file, String url) {
+    public ResponseMessage uploadBanner(MultipartFile file, String url, Integer type) {
         boolean res = false;
         try {
             String img = fileService.uploadImg(file.getOriginalFilename(), file.getInputStream());
-            res = managerService.insertBanner(new BannerInfo(img, url));
+            res = managerService.insertBanner(new BannerInfo(img, url, type));
         } catch (IOException e) {
             e.printStackTrace();
         }

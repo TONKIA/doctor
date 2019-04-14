@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label>医院：</label>
-            <input type="text" class="form-control" rows="3" v-model="hospital"></input>
+            <input type="text" class="form-control" v-model="hospital"></input>
         </div>
         <div class="form-group">
             <label>职位</label>
@@ -104,7 +104,7 @@
             <v-list class="pt-0" dense>
                 <v-divider></v-divider>
 
-                <v-list-tile @click="">
+                <v-list-tile @click="modify">
                     <v-list-tile-action>
                         <v-icon>edit</v-icon>
                     </v-list-tile-action>
@@ -131,7 +131,18 @@
 <template id="person">
     <div>
         <v-card-text>
-            {{doctor}}
+            星级：
+            <v-rating
+                    :value="doctor.star"
+                    color="amber"
+                    dense
+                    half-increments
+                    readonly
+                    size="14"
+            ></v-rating>
+            好评率：{{doctor.favorRate}}%<br/>
+            标签：{{doctor.label}}<br/>
+            所属医院：{{doctor.hospital}}<br/>
         </v-card-text>
 
         <v-card-text style="height: 100px">
@@ -252,6 +263,9 @@
                     console.info(response.body);
                     this.doctorInfo = response.body.data;
                 })
+            },
+            modify: function () {
+                window.open('/userinfo.jsp');
             }
         }
         ,

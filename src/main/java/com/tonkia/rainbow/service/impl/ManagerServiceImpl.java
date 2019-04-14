@@ -7,6 +7,8 @@ import com.tonkia.rainbow.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ManagerServiceImpl implements ManagerService {
     @Autowired
@@ -45,6 +47,11 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public boolean deleteTip(int id) {
         return managerMapper.delTip(id) > 0;
+    }
+
+    @Override
+    public List<BannerInfo> getBanner() {
+        return managerMapper.getBanner();
     }
 
 

@@ -24,10 +24,10 @@ public class PopularizationController {
         if (data != null)
             return new ResponseMessage("返回置顶成功", data, ResponseMessage.SUCCESS);
         else
-            return new ResponseMessage("返回置顶失败", data, ResponseMessage.FAILURE);
+            return new ResponseMessage("返回置顶失败", null, ResponseMessage.FAILURE);
     }
 
-    //0关注 1 推荐 2 情感 3疾病 4辟谣 5美容
+    //0关注 1 推荐 2 情感 3疾病 4美容 5辟谣
     //0 置顶 1 推荐
     @RequestMapping("getArticle/{category}")
     @ResponseBody
@@ -47,6 +47,16 @@ public class PopularizationController {
         if (data != null)
             return new ResponseMessage("返回文章成功", data, ResponseMessage.SUCCESS);
         else
-            return new ResponseMessage("返回文章失败", data, ResponseMessage.FAILURE);
+            return new ResponseMessage("返回文章失败", null, ResponseMessage.FAILURE);
+    }
+
+    @RequestMapping("search")
+    @ResponseBody
+    public ResponseMessage search(String keyword) {
+        List<ArticleInfo> data = popularizationService.search(keyword);
+        if (data != null)
+            return new ResponseMessage("搜索文章成功", data, ResponseMessage.SUCCESS);
+        else
+            return new ResponseMessage("搜索文章失败", null, ResponseMessage.FAILURE);
     }
 }
